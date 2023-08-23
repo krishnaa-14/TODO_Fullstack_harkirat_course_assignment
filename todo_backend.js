@@ -41,7 +41,8 @@
  */
   const express = require('express');
   const bodyParser = require('body-parser');
-  const PORT = 3000;
+  const path = require('path');
+  const PORT = 3001;
   const app = express();
   
   app.use(bodyParser.json());
@@ -70,12 +71,15 @@
   app.post("/todos", (req, res) => {
     var todo = req.body;
   
+    console.log("req.body without id");
+    console.log(todo);
+
     const uniqueId = Date.now().toString();
     todo["id"] = uniqueId;
   
-    res.status(201).send({
-      "id" : uniqueId
-    })
+    console.log(todo);
+
+    res.status(201).send(todo)
   
     todoItems.push(todo);
   })
@@ -111,11 +115,12 @@
   })
   
   app.get("/", (req, res) => {
-    res.send("Intial Route For TODO APP");
+    // When you try to send the file in the initial route, you need to use res.sendFile and use path to the join the filename. 
+
+    res.sendFile(path.join(__dirname, 'index.html'));
   })
   
   app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`)
   })
 
-  

@@ -1,0 +1,23 @@
+{
+  "name": "todo_fullstack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "todo_backend.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krishnaa-14/TODO_Fullstack_harkirat_course_assignment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krishnaa-14/TODO_Fullstack_harkirat_course_assignment/issues"
+  },
+  "homepage": "https://github.com/krishnaa-14/TODO_Fullstack_harkirat_course_assignment#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

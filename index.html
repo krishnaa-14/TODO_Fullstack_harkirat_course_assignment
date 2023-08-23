@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+
+    function onPress() {
+        // Onpress is working when clicked
+        // console.log("ADD TODO IS CLICKED.")
+
+        const title = document.getElementById("todo_input").value;
+        const description = document.getElementById("todo_description").value;
+
+        console.log(title);
+        console.log(description);
+
+        const data = {
+            "title" : title, 
+            "description" : description
+        }
+
+        console.log(data);
+
+        // This is how we need send a POST request using fetch. 
+        // Till Now we are using postman to do this. But eventually when we click ADD TODO instead of sending the post request, 
+        // We need to get the all todo's and update the DOM.  
+
+        fetch('/todos', {
+            method : 'POST', 
+            headers : {
+                'Content-Type': 'application/json'
+            },
+
+            body : JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => console.log(data));
+    }
+
+</script>
+
+<body>
+    
+    <h3> Title : </h3> 
+    <input type = "text" id = "todo_input"> 
+    <br>
+    <h3> Description : </h3>
+    <input type = "text" id = "todo_description">
+    <br> 
+    <br>
+
+    <button type = "submit" onclick="onPress()"> ADD TODO</button>
+</body>    
+</html>
