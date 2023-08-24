@@ -4,9 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <script>
+
+    function deleteOnClick(id) {
+
+        console.log(id);
+
+        const parentElement = document.getElementById("mainArea");
+        const elementToDelete = document.getElementById(id);
+
+        parentElement.removeChild(elementToDelete);
+    }
+
+    function domUpdate(data) {
+
+        // console.log("script");
+        // console.log(data);
+
+        const parentElement = document.getElementById("mainArea");
+        var newChild = document.createElement("div");
+
+        const randomId = Date.now();
+
+        newChild.setAttribute("id", randomId);
+
+        var child1 = document.createElement("h6");
+        child1.textContent = data.title;
+
+        var child2 = document.createElement("h6");
+        child2.textContent = data.description;
+
+        var deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "DELETE TODO"
+
+        deleteBtn.setAttribute("id", data.id);
+        deleteBtn.setAttribute("onclick", "deleteOnClick(" + randomId + ")");
+
+        console.log(deleteBtn);
+
+        newChild.appendChild(child1);
+        newChild.appendChild(child2);
+        newChild.appendChild(deleteBtn);
+    
+        parentElement.appendChild(newChild);
+    }
 
     function onPress() {
         // Onpress is working when clicked
@@ -38,7 +82,7 @@
             body : JSON.stringify(data)
         })
         .then(response => response.json())
-        .then(data => console.log(data));
+        .then(data => domUpdate(data));
     }
 
 </script>
@@ -54,5 +98,9 @@
     <br>
 
     <button type = "submit" onclick="onPress()"> ADD TODO</button>
+
+    <div id = "mainArea"> 
+
+    </div>
 </body>    
 </html>
