@@ -10,14 +10,34 @@
 <script>
 
     function deleteOnClick(id) {
-
         console.log(id);
 
         const parentElement = document.getElementById("mainArea");
         const elementToDelete = document.getElementById(id);
 
-        parentElement.removeChild(elementToDelete);
+        console.log(elementToDelete);
+
+        const dataId = elementToDelete.querySelector("button").getAttribute("id");
+
+        fetch('/todos/' + dataId, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log(response)
+            if (response.ok) {
+                parentElement.removeChild(elementToDelete);
+            } else {
+                console.error('Error deleting todo:', response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting todo:', error);
+        });
     }
+
 
     function domUpdate(data) {
 
